@@ -17,12 +17,23 @@
         <div class="inputs">
             <label for="nome">Nome</label>
             <input type="text" placeholder="Nome" name="nome" id="nome">
+
             <label for="email">Email</label>
             <input type="email" placeholder="Email" name="email" id="email">
+            <%     if(validacaoArray.length >= 1){ %>
+                <%    for(let i = 0; i < validacaoArray.length; i++){ %>
+                    <%  if(validacaoArray[i].path === 'email'){ %>
+                        <%=  validacaoArray[i].msg  %>
+                    <% } %>
+                <%    } %>
+                <% } %>
+
             <label for="senha">Senha</label>
             <input type="password" placeholder="Senha" name="senha" id="senha">
+
             <label for="confirmarSenha">Confirmar Senha</label>
             <input type="password" placeholder="Confirme sua senha" name="confirmarSenha" id="confirmarSenha">
+
         </div>
 
         <div class="botao">
@@ -33,3 +44,4 @@
     </form>
 </body>
 </html>
+

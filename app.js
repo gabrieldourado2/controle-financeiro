@@ -19,7 +19,10 @@ app.listen(3000, () =>{
 });
 
 app.get('/cadastro', (req,res) =>{
-    res.render('cadastro')
+    var validacaoArray = [];
+    res.render('cadastro', {
+        validacaoArray
+    })
 })
 
 
@@ -40,14 +43,12 @@ app.post('/cadastro',body('nome').trim().notEmpty().withMessage('Preencha o camp
     //.bail() serve pra parar as outras validação se a primeira ou outra testada primeira falhar
     
     if(validacaoArray.length > 0){
-        var erro = '';
-        for(let i = 0; i < validacaoArray.length; i++){
-            erro += (`${validacaoArray[i].msg}<br>`)
-        }
         return(
-            res.send(erro)
+            res.render('cadastro',{
+                validacaoArray
+            })
         )
-    }
+    }//caso nao tenha erro ele vai direto pro try ali embaixo
     
     try {
         await connection.query(
