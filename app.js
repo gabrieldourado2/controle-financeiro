@@ -11,8 +11,35 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));//disponibiliza os arquivos publicos como os css
 
 app.get('/', (req, res) =>{
-    res.render('login')
+    var validacaoArray = [];
+    res.render('login', {validacaoArray})
 })
+
+app.post('/login' ,body('email').trim().notEmpty().withMessage("Preencha o email").bail().isEmail().withMessage('Digite um email válido'),body('senha').notEmpty().withMessage('Preencha a senha') , async (req,res) =>{
+    var validacaoArray = validationResult(req).array();
+    const email = req.body.email;
+    const senha = req.body.senha;
+    const connection = await promise;
+
+    if(validacaoArray.length >= 1){
+        res.render('login', {validacaoArray})
+        return
+    }
+
+    const [result] = await connection.query(
+        'SELECT EXISTS(SELECT 1 FROM usuarios WHERE email = ? AND senha = ?) AS loginValido', [email, senha]
+    )
+
+    if(result[0].loginValido === 1){
+        res.redirect('/dashboard')
+        return
+    }else{
+        validacaoArray.push({msg:'Email ou Senha inválidos', path:'loginErrado'})
+        res.render('login', {validacaoArray})
+    }
+
+})
+
 
 app.listen(3000, () =>{
     console.log('Servidor rodando em http://localhost:3000');

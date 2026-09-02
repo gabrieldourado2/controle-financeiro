@@ -45,7 +45,7 @@
             <label for="senha">Senha</label>
             <input type="password" placeholder="Senha" name="senha" id="senha" class="<%= erros.senha !== undefined ? 'erro' : '' %>">
             <%if(erros.senha !== undefined){ %>
-                <span class="mensagem-erro">%>
+                <span class="mensagem-erro">
                     <%=erros.senha.msg%>
                 </span>
             <%}%>

@@ -14,14 +14,40 @@
         <h3>Faça login para continuar</h3>
 
         <div class="inputs">
-            <label for="email">Email</label><br>
-            <input type="email" id="email" name="email" placeholder="Email"><br>
+            <% var erros = {
+                email: validacaoArray.find((erro) =>{return erro.path === 'email'}),
+                senha: validacaoArray.find((erro) =>{return erro.path === 'senha'}),
+                loginValido: validacaoArray.find((erro) => {return erro.msg === 'Email ou Senha inválidos'})
+            }%>
 
-            <label for="senha">Senha</label><br>
-            <input type="password" id="senha" name="senha" placeholder="Senha"><br><br>
-            
+            <div class="campo">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email" class="<%= erros.email || erros.loginValido !== undefined ? 'erro' : '' %>">
+                <% if(erros.email !== undefined){%>
+                    <span class="mensagem-erro">
+                        <%= erros.email !== undefined ? erros.email.msg : ''%>
+                    </span>
+                    <%}%> 
+            </div>
+         
+            <div class="campo">
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" name="senha" placeholder="Senha" class="<%= erros.senha || erros.loginValido !== undefined ? 'erro' : '' %>">
+                <% if(erros.senha !== undefined){%>
+                    <span class="mensagem-erro">
+                        <%= erros.senha !== undefined ? erros.senha.msg : ''%>
+                    </span>
+                    <%}%> 
+            </div>
+                    
         </div>
 
+
+            <% if(erros.loginValido !== undefined){%>
+                <span class="mensagem-erro">
+                    <%= erros.loginValido !== undefined ? erros.loginValido.msg : ''%>
+                </span>
+            <%}%> 
         <div class="botao">
             <button>Entrar</button>
         </div>
