@@ -28,18 +28,26 @@ h1,h2,h3{
 }
 
 label{
-    display: flex;
-    
+    margin-left: 5px;
 }
 
-#email,#senha,#confirmarSenha,#nome{
+#senha,#email{
     display: flex;
-    border: none;
+    box-shadow: 0.5px 1px 1px 0.4px;
     padding: 15px;
     border-radius: 4px;
     background-color: #E5E5E5;
     width: 65vw;
     max-width: 550px;
+    transition: 0.2s;
+}
+
+#senha:hover,#email:hover{
+    background-color: #CBCBCB;
+}
+
+#senha,#email:focus{
+    outline-color: #005D00;
 }
 
 .inputs{
@@ -53,10 +61,20 @@ button{
     border: none;
     border-radius: 4px;
     background-color: #21C25E;
-    box-shadow: -1px 1px 4px 0px;
+    box-shadow: -2px 3px 4px 0px;
     padding: 15px;
     width: 100vw;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+button:active{
+    box-shadow: -1px 2px 4px 0;
+    transform: translateY(2px);
+}
+
+button:hover{
+    background-color: #009000;
 }
 
 .botao{

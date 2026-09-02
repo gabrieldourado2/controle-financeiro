@@ -15,24 +15,51 @@
 
         
         <div class="inputs">
+                <% var erros = { 
+                     nome: validacaoArray.find((erro) => {return erro.path === 'nome'}), 
+                     email: validacaoArray.find((erro) => {return erro.path === 'email'}),
+                     senha: validacaoArray.find((erro) => {return erro.path === 'senha'}), 
+                     confirmarSenha: validacaoArray.find((erro) => {return erro.path === 'confirmarSenha'}) 
+                 } %>
+            <div class="campo">
             <label for="nome">Nome</label>
-            <input type="text" placeholder="Nome" name="nome" id="nome">
+            <input type="text" placeholder="Nome" name="nome" id="nome" class="<%= erros.nome !== undefined ? 'erro' : '' %>">
+            <% if(erros.nome !== undefined){ %>
+                <span class="mensagem-erro">
+                    <%=erros.nome.msg%>
+                </span>
+            <% } %>
+            </div>
 
+            <div class="campo">
             <label for="email">Email</label>
-            <input type="email" placeholder="Email" name="email" id="email">
-            <%     if(validacaoArray.length >= 1){ %>
-                <%    for(let i = 0; i < validacaoArray.length; i++){ %>
-                    <%  if(validacaoArray[i].path === 'email'){ %>
-                        <%=  validacaoArray[i].msg  %>
-                    <% } %>
-                <%    } %>
-                <% } %>
+            <input type="email" placeholder="Email" name="email" id="email" class="<%= erros.email !== undefined ? 'erro' : '' %>">
+            <% if(erros.email !== undefined){ %>
+                <span class="mensagem-erro">
+                    <%= erros.email.msg %>
+                </span>
+            <% } %>
+            </div>
 
+            <div class="campo">
             <label for="senha">Senha</label>
-            <input type="password" placeholder="Senha" name="senha" id="senha">
-
+            <input type="password" placeholder="Senha" name="senha" id="senha" class="<%= erros.senha !== undefined ? 'erro' : '' %>">
+            <%if(erros.senha !== undefined){ %>
+                <span class="mensagem-erro">%>
+                    <%=erros.senha.msg%>
+                </span>
+            <%}%>
+            </div>
+            
+            <div class="campo">
             <label for="confirmarSenha">Confirmar Senha</label>
-            <input type="password" placeholder="Confirme sua senha" name="confirmarSenha" id="confirmarSenha">
+            <input type="password" placeholder="Confirme sua senha" name="confirmarSenha" id="confirmarSenha" class="<%= erros.confirmarSenha !== undefined ? 'erro' : '' %>">
+            <%if(erros.confirmarSenha !== undefined){%>
+                <span class="mensagem-erro">
+                    <%=erros.confirmarSenha.msg%>
+                </span>
+            <%}%>
+            </div>
 
         </div>
 
