@@ -27,14 +27,14 @@ app.post('/login' ,body('email').trim().notEmpty().withMessage("Preencha o email
     }
 
     const [result] = await connection.query(
-        'SELECT EXISTS(SELECT 1 FROM usuarios WHERE email = ? AND senha = ?) AS loginValido', [email, senha]
+        'SELECT * FROM usuarios WHERE email = ? AND senha = ?', [email, senha]
     )
 
-    if(result[0].loginValido === 1){
+    if(result.length >= 1){
         res.redirect('/dashboard')
         return
     }else{
-        validacaoArray.push({msg:'Email ou Senha inválidos', path:'loginErrado'})
+        validacaoArray.push({msg:'Email ou Senha inválidos'})
         res.render('login', {validacaoArray})
     }
 
