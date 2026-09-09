@@ -1,5 +1,6 @@
 const express = require('express');
 const {body, validationResult} = require('express-validator');
+const session = require('express-session')
 const promise = require('./database');
 
 const app = express();//cria a aplicação ou o servidor
@@ -9,10 +10,11 @@ app.set('view engine', 'ejs');//fala pra ler arquivos ejs, configurando o ejs
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.static('public'));//disponibiliza os arquivos publicos como os css
+app.use(session({secret:'2512J', resave:false, saveUninitialized:false, cookie:{secure:false}}))//configura o session
 
 app.get('/', (req, res) =>{
     var validacaoArray = [];
-    res.render('login', {validacaoArray})
+    req.session.usuarioId >= 1 ? res.redirect('/dashboard') : res.render('login', {validacaoArray})
 })
 
 app.post('/login' ,body('email').trim().notEmpty().withMessage("Preencha o email").bail().isEmail().withMessage('Digite um email válido'),body('senha').notEmpty().withMessage('Preencha a senha') , async (req,res) =>{
@@ -21,20 +23,22 @@ app.post('/login' ,body('email').trim().notEmpty().withMessage("Preencha o email
     const senha = req.body.senha;
     const connection = await promise;
 
-    if(validacaoArray.length >= 1){
+
+    if(validacaoArray.length >= 1){//verifica se tem erros
         res.render('login', {validacaoArray})
         return
     }
 
-    const [result] = await connection.query(
+    const [result] = await connection.query(//ve se tem o login que o usuario inseriu no banco de dados
         'SELECT * FROM usuarios WHERE email = ? AND senha = ?', [email, senha]
     )
 
-    if(result.length >= 1){
+    if(result.length >= 1){//ve se o array tem alguma coisa, se tiver quer dizer que o login é valido
+        req.session.usuarioId = result[0].id
         res.redirect('/dashboard')
         return
     }else{
-        validacaoArray.push({msg:'Email ou Senha inválidos'})
+        validacaoArray.push({msg:'Email ou Senha inválidos'})//se nao, ele registra o erro no validacaoArray e volta
         res.render('login', {validacaoArray})
     }
 
@@ -47,9 +51,7 @@ app.listen(3000, () =>{
 
 app.get('/cadastro', (req,res) =>{
     var validacaoArray = [];
-    res.render('cadastro', {
-        validacaoArray
-    })
+    req.session.usuarioId >= 1 ? res.redirect('/dashboard') : res.render('cadastro', {validacaoArray})
 })
 
 
@@ -109,5 +111,11 @@ app.post('/cadastro',body('nome').trim().notEmpty().withMessage('Preencha o camp
 });
 
 app.get('/dashboard', (req,res) =>{
-    res.render('dashboard')
+    req.session.usuarioId === undefined ? res.redirect('/') : res.render('dashboard')
+})
+
+app.get('/logout', (req,res) =>{
+    req.session.destroy((erro) => {
+        erro !== undefined ? res.send('Ocorreu um erro') : res.redirect('/')
+    })
 })

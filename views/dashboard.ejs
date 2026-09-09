@@ -3,10 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>Controle Financeiro</h1>
-    <h2>Bem-Vindo ao Dashboard</h2>
+    <header>
+        <div id="controle-financeiro-titulo">
+            <h1>Controle Financeiro</h1>
+            <p>Bem-Vindo ao Dashboard.</p>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout">Sair da conta</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="resumo-secao">
+        <h2 id="resumo-financeiro-titulo">Resumo Financeiro</h2>
+        <div class="grade">
+            <article>
+                <dl>
+                    <dt>Saldo</dt>
+                    <dd>
+                        <span>R$ 4.000</span>
+                        <p class="informacoes-card">Saldo Atual</p>
+                    </dd>
+                </dl>
+            </article>
+            <article>
+                <dl>
+                    <dt>Entradas</dt>
+                    <dd>
+                        <span>R$ 2.000</span>
+                        <p class="informacoes-card">Este mês</p>
+                    </dd>
+                </dl>
+            </article>
+        <article>
+            <dl>
+                <dt>Saídas</dt>
+                <dd>
+                    <span>R$ 1.000</span>
+                    <p class="informacoes-card">Este mês</p>
+                </dd>
+            </dl>
+        </article>
+    </div>
+    </section>
+
+    <section class="movimentacoes-secao">
+        <div class="centralizar-titulo">
+            <h2 id="movimentacoes-titulo">Movimentações</h2>
+        </div>
+
+        <div class="tabela">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>05/09</td>
+                        <td>Salário</td>
+                        <td>Trabalho</td>
+                        <td class="entrada">Entrada</td>
+                        <td>R$ 2.000</td>
+                    </tr>
+                    <tr>
+                        <td>06/09</td>
+                        <td>Mercado</td>
+                        <td>Alimentação</td>
+                        <td class="saida">Saída</td>
+                        <td>R$ 150</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <small>© 2026 Controle Financeiro</small>
+        <small>Desenvolvido por Gabriel Dourado</small>
+    </footer>
 </body>
 </html>

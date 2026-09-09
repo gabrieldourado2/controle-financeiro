@@ -1,0 +1,165 @@
+*{
+    font-family:Arial, Helvetica, sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f1f1f1;
+}
+
+header{
+    display: flex;
+    padding: 2%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: #0e570e;
+}
+
+header h1{
+    color: #f1f1f1;
+}
+
+header p{
+    color: #c8d8c8;
+}
+
+ul{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 1rem;
+}
+
+a{
+    text-decoration: none;
+    color: #c8d8c8;
+    transition: 0.2s;
+}
+
+a:hover{
+    color: #a2b1a2;
+}
+
+#controle-financeiro-titulo{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+h2{
+    text-align: center;
+}
+
+.grade,#resumo-financeiro-titulo{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 80%;
+    margin: auto; /* faz os cards se alinharem no centro */
+    text-align: center;
+}
+
+article{
+    height: 8rem;
+    margin: 2rem;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: -2px 2px 3px 1px gray;
+    transition: 0.2s;
+}
+
+article:hover{
+    transform: translateY(-2px);
+    box-shadow: -3px 3px 4px 1px gray;
+}
+
+dt{
+    background-color: #006e00;
+    font-size: 1.5rem;
+    width: 100%;
+    padding: 0.5rem;
+
+}
+
+dd{
+    display: flex;
+    background-color: #DDE8DF;
+    padding: 1.5rem;
+    height: 100%;
+    flex-grow: 1;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+span{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #015a01;
+}
+
+.informacoes-card{
+    font-size: small;
+}
+
+dl{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.resumo-secao{
+    margin-bottom: 1rem;
+}
+
+.centralizar-titulo{
+    width: 60%;
+    margin: auto;
+}
+
+#movimentacoes-titulo{
+    text-align: left;
+}
+
+table{
+    width: 60%;
+    max-width: 700px;
+    text-align: center;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 2rem;
+}
+
+.tabela{
+    display: flex;
+    justify-content: center;
+}
+
+th{
+    background-color: #489b48;
+    padding: 0.8rem;
+}
+
+td{
+    padding: 0.8rem;
+    border-bottom-width: 0.1rem;
+    border-bottom-style: solid;
+    border-color: #3d8a3d;
+}
+
+.entrada{
+    background-color: #B8D9BC;
+}
+
+.saida{
+    background-color: #E8BABA;
+}
+
+.movimentacoes-secao{
+    margin-bottom: 1rem;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+}
